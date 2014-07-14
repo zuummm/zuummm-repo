@@ -12,65 +12,73 @@ import org.junit.Test;
 
 public class NetCalculatorJMockitTest {
 
-	private ICalculator mockedCalcMethod;
-	private NetCalculator netCalculator;
+    private ICalculator mockedCalcMethod;
+    private NetCalculator netCalculator;
 
-	@Before
-	public void setUp() throws Exception {
-		mockedCalcMethod = new MockUp<ICalculator>() {
-			@Mock
-			public double calc(Position position) {
-				switch (position) {
-				case MANAGER:
-					return 700000.0;
-				case DEVELOPER:
-					return 500000.0;
-				default:
-					return 1 / 0;
-				}
-			}
-		}.getMockInstance();
+    @Before
+    public void setUp() throws Exception {
+        mockedCalcMethod = new MockUp<ICalculator>() {
+            @Mock
+            public double calc(Position position) {
+                switch (position) {
+                case MANAGER:
+                    return 700000.0;
+                case DEVELOPER:
+                    return 500000.0;
+                default:
+                    return 1 / 0;
+                }
+            }
+        }.getMockInstance();
 
-		netCalculator = new NetCalculator();
-	}
+        netCalculator = new NetCalculator();
+    }
 
-	@Test
-	public void testCalc1() {
-		// GIVEN
-		netCalculator.setCalcMethod(mockedCalcMethod);
-		netCalculator.setPosition(Position.MANAGER);
-		// THEN
-		assertEquals(700000.0, netCalculator.calc(), 0);
-		assertEquals(700000.0, netCalculator.calc(), 0);
-		// WHEN
-		netCalculator.setPosition(Position.DEVELOPER);
-		// THEN
-		assertEquals(500000.0, netCalculator.calc(), 0);
-		netCalculator.setPosition(Position.TESTER);
-	}
+    @Test
+    public void testCalc1() {
+        // GIVEN
+        netCalculator.setCalcMethod(mockedCalcMethod);
+        // WHEN
+        netCalculator.setPosition(Position.MANAGER);
+        
+        // THEN
+        assertEquals(700000.0, netCalculator.calc(), 0);
+        assertEquals(700000.0, netCalculator.calc(), 0);
+        
+        // WHEN
+        netCalculator.setPosition(Position.DEVELOPER);
+        
+        // THEN
+        assertEquals(500000.0, netCalculator.calc(), 0);
+        // unnecessary to call
+        // netCalculator.setPosition(Position.TESTER);
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testNoCalc() {
-		// GIVEN
-		netCalculator.setPosition(Position.TESTER);
-		// WHEN
-		netCalculator.calc();
-	}
+    @Test(expected = RuntimeException.class)
+    public void testNoCalc() {
+        // GIVEN
+        netCalculator.setPosition(Position.TESTER);
+        
+        // WHEN - THEN
+        netCalculator.calc();
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testNoPosition() {
-		// GIVEN
-		netCalculator.setCalcMethod(mockedCalcMethod);
-		// WHEN
-		netCalculator.calc();
-	}
+    @Test(expected = RuntimeException.class)
+    public void testNoPosition() {
+        // GIVEN
+        netCalculator.setCalcMethod(mockedCalcMethod);
+        
+        // WHEN - THEN
+        netCalculator.calc();
+    }
 
-	@Test(expected = RuntimeException.class)
-	public void testCalc2() {
-		// GIVEN
-		netCalculator.setPosition(Position.TESTER);
-		netCalculator.setCalcMethod(mockedCalcMethod);
-		// WHEN
-		netCalculator.calc();
-	}
+    @Test(expected = RuntimeException.class)
+    public void testCalc2() {
+        // GIVEN
+        netCalculator.setPosition(Position.TESTER);
+        netCalculator.setCalcMethod(mockedCalcMethod);
+        
+        // WHEN - THEN
+        netCalculator.calc();
+    }
 }
