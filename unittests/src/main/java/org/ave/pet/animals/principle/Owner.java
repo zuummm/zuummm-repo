@@ -7,16 +7,21 @@ import org.ave.pet.animals.Cat;
 import org.ave.pet.animals.Dog;
 import org.ave.pet.animals.Pet;
 
+/**
+ *  This class tries to follow as many Coding principle as the author knows :) 
+ * @author Andrea_Verebi
+ *
+ */
 public class Owner {
 
     private String name;
     private String address;
-    private List<? extends Pet> pets;
+    private List<Pet> pets;
 
     public Owner() {
     }
 
-    public Owner(String newName, String newAddress, List<? extends Pet> pets) {
+    public Owner(String newName, String newAddress, List<Pet> pets) {
         this.name = newName;
         this.address = newAddress;
         this.pets = pets;
@@ -28,25 +33,20 @@ public class Owner {
         }
     }
 
-    public List<Pet> getPetBySpecies(String species) {
+    public List<Pet> getPetBySpecies(Class<? extends Pet> petClass) {
         List<Pet> filteredResult = new ArrayList<Pet>();
         if (pets != null) {
-            for (Pet pet : pets)
-                if (pet instanceof Cat && "Cat".equalsIgnoreCase(species)) {
-                    filteredResult.add(pet);
-                } else if (pet instanceof Dog && "Dog".equalsIgnoreCase(species)) {
+            for (Pet pet : pets) {
+                if (petClass.isInstance(pet)) {
                     filteredResult.add(pet);
                 }
+            }
         }
         return filteredResult;
     }
 
-    public boolean hasCat() {
-        return !getPetBySpecies("Cat").isEmpty();
-    }
-
-    public boolean hasDog() {
-        return !getPetBySpecies("Dog").isEmpty();
+    public boolean hasPet(Class<? extends Pet> petClass) {
+        return !getPetBySpecies(petClass==null ? Pet.class : petClass).isEmpty();
     }
 
     public String getName() {

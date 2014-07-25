@@ -2,10 +2,10 @@ package org.ave.pet.calculation;
 
 public class NetCalculator {
 
-    private ICalculator calcMethod;
+    private Calculator calcMethod;
     private Position position;
 
-    public void setCalcMethod(ICalculator calcMethod) {
+    public void setCalcMethod(Calculator calcMethod) {
         this.calcMethod = calcMethod;
     }
 

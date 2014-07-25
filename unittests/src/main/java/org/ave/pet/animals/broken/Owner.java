@@ -4,6 +4,11 @@ import org.ave.pet.animals.Cat;
 import org.ave.pet.animals.Dog;
 import org.ave.pet.animals.Pet;
 
+/** 
+ * This Owner class tries to brake follow as many Coding principle as possible
+ * @author Andrea_Verebi
+ *
+ */
 public class Owner {
 
     private String name;

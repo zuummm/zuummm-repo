@@ -24,6 +24,6 @@ public class TalkingTest {
 
     @Test
     public void testCatsNotUnderstandingDogs() {
-        assertFalse(cat.talk().equalsIgnoreCase(dog.talk()));
+        assertFalse(cat.getVoice().equalsIgnoreCase(dog.getVoice()));
     }
 }

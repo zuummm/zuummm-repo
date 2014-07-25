@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import mockit.Mock;
 import mockit.MockUp;
 
-import org.ave.pet.calculation.ICalculator;
+import org.ave.pet.calculation.Calculator;
 import org.ave.pet.calculation.NetCalculator;
 import org.ave.pet.calculation.Position;
 import org.junit.Before;
@@ -12,19 +12,21 @@ import org.junit.Test;
 
 public class NetCalculatorJMockitTest {
 
-    private ICalculator mockedCalcMethod;
+    private Calculator mockedCalcMethod;
     private NetCalculator netCalculator;
+    private static final double NET_SALARY_MANAGER = 700000.0;
+    private static final double NET_SALARY_DEVELOPER = 500000.0;
 
     @Before
     public void setUp() throws Exception {
-        mockedCalcMethod = new MockUp<ICalculator>() {
+        mockedCalcMethod = new MockUp<Calculator>() {
             @Mock
             public double calc(Position position) {
                 switch (position) {
                 case MANAGER:
-                    return 700000.0;
+                    return NET_SALARY_MANAGER;
                 case DEVELOPER:
-                    return 500000.0;
+                    return NET_SALARY_DEVELOPER;
                 default:
                     return 1 / 0;
                 }
@@ -35,21 +37,21 @@ public class NetCalculatorJMockitTest {
     }
 
     @Test
-    public void testCalc1() {
+    public void testCalcMockitPractice() {
         // GIVEN
         netCalculator.setCalcMethod(mockedCalcMethod);
         // WHEN
         netCalculator.setPosition(Position.MANAGER);
         
         // THEN
-        assertEquals(700000.0, netCalculator.calc(), 0);
-        assertEquals(700000.0, netCalculator.calc(), 0);
+        assertEquals(NET_SALARY_MANAGER, netCalculator.calc(), 0);
+        assertEquals(NET_SALARY_MANAGER, netCalculator.calc(), 0);
         
         // WHEN
         netCalculator.setPosition(Position.DEVELOPER);
         
         // THEN
-        assertEquals(500000.0, netCalculator.calc(), 0);
+        assertEquals(NET_SALARY_DEVELOPER, netCalculator.calc(), 0);
         // unnecessary to call
         // netCalculator.setPosition(Position.TESTER);
     }

@@ -1,12 +1,12 @@
 package org.ave.pet.animals;
 
 
-public class Cat extends Pet {
+public class Fish extends Pet {
 
-    private static final String NAMING_MALE = "Tom";
-    private static final String NAMING_FEMALE = "Queen";
-    private static final String NAMING_BABY = "Kitten";
-    private static final String VOICE = "Meow";
+    private static final String NAMING_MALE = "male";
+    private static final String NAMING_FEMALE = "female";
+    private static final String NAMING_BABY = "baby";
+    private static final String VOICE = "...";
 
     @Override
     public String getSexBySpecies() {
@@ -17,10 +17,9 @@ public class Cat extends Pet {
     public String getBabyName() {
         return NAMING_BABY;
     }
-
+    
     @Override
     public String getVoice() {
         return VOICE;
     }
-
 }
