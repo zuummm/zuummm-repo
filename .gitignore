@@ -5,3 +5,7 @@
 /unittests/target
 /unittests/.classpath
 /unittests/.project
+.settings
+.project
+.classpath
+target
