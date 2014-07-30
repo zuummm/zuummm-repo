@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+version = '1.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+	testCompile group: 'mockit', name: 'jmockit', version: '0.999'
+	testCompile group: 'org.easymock', name: 'easymockclassextension', version: '3.1'
+}
+
+jar {
+    baseName = 'unittests'
+    version =  '1.1-SNAPSHOT'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
