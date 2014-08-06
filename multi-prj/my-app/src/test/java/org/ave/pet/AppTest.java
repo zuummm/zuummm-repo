@@ -2,6 +2,7 @@ package org.ave.pet;
 
 import static org.junit.Assert.*;
 
+import org.ave.pet.animals.Cat;
 import org.junit.Test;
 
 public class AppTest {
@@ -15,7 +16,7 @@ public class AppTest {
         newApp.getOwner().feedPet();
         
         //THEN
-        assertTrue(newApp.getOwner().hasCat());
+        assertTrue(newApp.getOwner().hasPet(Cat.class));
         assertFalse(newApp.getPet().isHungry());
     }
 

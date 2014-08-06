@@ -7,52 +7,63 @@
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>moduling</name>
+	<name>{project.artifactId}</name>
 	<url>http://maven.apache.org</url>
 
 	<profiles>
-        <profile>
-            <id>all</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <modules>
-                <module>submodul-one</module>
-                <module>submodul-two</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>one</id>
-            <modules>
-                <module>submodul-one</module>
-            </modules>
-        </profile>
-    </profiles>
+		<profile>
+			<id>all</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>submodul-one</module>
+				<module>submodul-two</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>one</id>
+			<modules>
+				<module>submodul-one</module>
+			</modules>
+		</profile>
+	</profiles>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.8</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<executable>${env.JAVA_7_HOME}\bin\javac</executable>
-					<fork>true</fork>
-				</configuration>
-			</plugin>
-		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<showDeprecation>true</showDeprecation>
+						<showWarnings>true</showWarnings>
+						<executable>${env.JAVA_7_HOME}\bin\javac</executable>
+						<fork>true</fork>
+					</configuration>
+				</plugin>
+				<plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <jvm>${env.JAVA_7_HOME}\bin\java</jvm>
+                    </configuration>
+                </plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
