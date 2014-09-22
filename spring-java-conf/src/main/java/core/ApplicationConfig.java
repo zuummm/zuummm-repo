@@ -1,31 +1,21 @@
 package core;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-/*@ComponentScan
-@EnableAutoConfiguration*/
 public class ApplicationConfig {
-/*
-*/
-    @Bean(name="event")
-    public Event event() {
-       return new Event("Happy Hours");
-    }
 
-    @Bean(name="pub")
-    @Scope("prototype")
+    @Bean
+    @Scope("singleton")
     public Pub pub() {
-       return new Pub();
+        return new Pub();
     }
     
-    /*
-    public static void main(String[] args) {
-        SpringApplication.run(ApplicationConfig.class, args);
-    }*/
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    @Scope("prototype")
+    public Event event() {
+        return new Event("Happy Hours");
+    }
 }

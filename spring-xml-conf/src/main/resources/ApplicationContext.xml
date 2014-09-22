@@ -5,11 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="eventBean" class="core.Event" scope="singleton">
+	<bean id="eventBean" class="core.Event" scope="prototype" init-method="init" destroy-method="destory">
 		<constructor-arg name="name" value="Happy Hours"/>
 	</bean>
 
-	<bean id="pubBean" class="core.Pub" scope="prototype">
+	<bean id="pubBean" class="core.Pub" scope="singleton">
         <property name="name" value="Grund"/>
         <property name="address" value="Bp.,VIII. Nagytemplom utca 30."/>
         <property name="message" value="Cheers!"/>

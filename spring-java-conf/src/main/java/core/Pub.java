@@ -1,5 +1,7 @@
 package core;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class Pub {
 
     private String name;
@@ -35,6 +37,7 @@ public class Pub {
         return event;
     }
 
+    @Autowired
     public void setEvent(Event event) {
         this.event = event;
     }
