@@ -1,5 +1,8 @@
 package core;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class Event {
 
     private String name;
@@ -12,12 +15,15 @@ public class Event {
         return name;
     }
 
+    
+    @PostConstruct
     public void init() {
-        System.out.println("Bean is going through init.");
+        System.out.println("Final count down ... init is ready.");
     }
 
+    @PreDestroy
     public void destroy() {
-        System.out.println("Bean will destroy now.");
+        System.out.println("Final count down ... Finito!");
     }
 
 }

@@ -1,5 +1,8 @@
 package core;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
 import org.junit.Test;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,12 +18,10 @@ public class CoreTest {
         
         // WHEN-THEN
         context.registerShutdownHook();
-        assertAll(pub, event);
-    }
-
-    private void assertAll(Pub pub, Event event) {
-        org.junit.Assert.assertEquals(event.getName(),pub.getEvent().getName());        
-        org.junit.Assert.assertNotEquals(event,pub.getEvent());
+        context.close();
+        
+        assertEquals(event.getName(),pub.getEvent().getName());
+        assertNotEquals(event,pub.getEvent());
     }
 
 }
